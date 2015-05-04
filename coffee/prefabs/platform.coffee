@@ -1,5 +1,7 @@
 engine.addPrefab "platform",
 	constructor: (args) ->
+
+		#Create physics body
 		@body = new Engine.PhysicsBody engine,
 			x: args.x
 			y: args.y
@@ -10,11 +12,10 @@ engine.addPrefab "platform",
 			drag: 1
 			friction: 0.1
 
-		@force = 23
-
 	update: (entities) ->
-		@body.update(engine)
+		@body.update()
 
+	#Drawing a rectangle
 	draw: (fab, can) ->
 		can.add new fab.Rect
 			width: @body.width

@@ -2,7 +2,7 @@
 (function() {
   engine.addPrefab("platform", {
     constructor: function(args) {
-      this.body = new Engine.PhysicsBody(engine, {
+      return this.body = new Engine.PhysicsBody(engine, {
         x: args.x,
         y: args.y,
         width: args.width,
@@ -12,10 +12,9 @@
         drag: 1,
         friction: 0.1
       });
-      return this.force = 23;
     },
     update: function(entities) {
-      return this.body.update(engine);
+      return this.body.update();
     },
     draw: function(fab, can) {
       return can.add(new fab.Rect({

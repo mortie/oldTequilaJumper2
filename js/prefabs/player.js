@@ -8,12 +8,12 @@
         width: 10,
         height: 10,
         depth: 10,
-        density: 10,
+        density: 20,
         drag: 1.05,
-        friction: 0.01
+        friction: 0.002
       });
       this.force = 23;
-      this.jumpForce = 0.8;
+      this.jumpForce = 0.4;
       return this.isOnGround = false;
     },
     update: function(entities) {
