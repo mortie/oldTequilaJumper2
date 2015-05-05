@@ -5,15 +5,15 @@
       this.body = new Engine.PhysicsBody(engine, {
         x: args.x,
         y: args.y,
-        width: 10,
-        height: 10,
-        depth: 10,
-        density: 20,
-        drag: 1.05,
+        width: 20,
+        height: 20,
+        depth: 20,
+        density: 10,
+        drag: 1,
         friction: 0.002
       });
-      this.force = 23;
-      this.jumpForce = 0.4;
+      this.force = 100;
+      this.jumpForce = 0.8;
       return this.isOnGround = false;
     },
     update: function(entities) {
@@ -51,15 +51,32 @@
         this.body.gravity();
       }
       if (this.isOnGround) {
-        return this.body.frictionX();
+        return this.body.applyFriction();
       }
     },
     draw: function(fab, can) {
-      return can.add(new fab.Rect({
-        width: this.body.width,
-        height: this.body.height,
+      var offsetX, offsetY;
+      offsetX = this.body.vel.x * -10;
+      offsetY = this.body.vel.y * -10;
+      return can.add(new fab.Polygon([
+        {
+          x: 0,
+          y: this.body.height
+        }, {
+          x: offsetX,
+          y: offsetY
+        }, {
+          x: this.body.width + offsetX,
+          y: offsetY
+        }, {
+          x: this.body.width,
+          y: this.body.height
+        }
+      ], {
+        top: this.body.pos.y,
         left: this.body.pos.x,
-        top: this.body.pos.y
+        fill: "#008c00",
+        stroke: "00c000"
       }));
     }
   });

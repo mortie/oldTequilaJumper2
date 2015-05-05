@@ -1,5 +1,6 @@
 #Create engine instance
-window.engine = new Engine "canvas", ["player", "platform"]
+window.engine = new Engine "canvas", ["player", "platform"],
+	gravity: 40
 
 #Set key map
 engine.keys =

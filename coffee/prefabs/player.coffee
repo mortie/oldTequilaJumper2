@@ -5,16 +5,16 @@ engine.addPrefab "player",
 		@body = new Engine.PhysicsBody engine,
 			x: args.x
 			y: args.y
-			width: 10
-			height: 10
-			depth: 10
-			density: 20
-			drag: 1.05
+			width: 20
+			height: 20
+			depth: 20
+			density: 10
+			drag: 1
 			friction: 0.002
 
 		#Some physics related values
-		@force = 23
-		@jumpForce = 0.4
+		@force = 100
+		@jumpForce = 0.8
 		@isOnGround = false
 
 	#Physics updates per frame
@@ -47,12 +47,21 @@ engine.addPrefab "player",
 		#Physics related updates
 		@body.update()
 		@body.gravity() if !@isOnGround
-		@body.frictionX() if @isOnGround
+		@body.applyFriction() if @isOnGround
 
 	#Drawing a square
 	draw: (fab, can) ->
-		can.add new fab.Rect
-			width: @body.width
-			height: @body.height
-			left: @body.pos.x
+		offsetX = @body.vel.x * -10
+		offsetY = @body.vel.y * -10
+
+		can.add new fab.Polygon [
+			{x: 0, y: @body.height},
+			{x: offsetX, y: offsetY},
+			{x: @body.width + offsetX, y: offsetY},
+			{x: @body.width, y: @body.height}
+		], {
 			top: @body.pos.y
+			left: @body.pos.x
+			fill: "#008c00"
+			stroke: "00c000"
+		}
